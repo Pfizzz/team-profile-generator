@@ -140,6 +140,23 @@ function internQuestions(employeeData) {
                 name: "employeeConfirm"
             },
         ])
+        .then((data) => {
+            const intern = new Intern(
+                employeeData.name,
+                employeeData.id,
+                employeeData.email,
+                employeeData.officeNumber,
+                data.school
+            );
+
+            team.push(intern);
+
+            if(data.employeeConfirm === true) {
+                generateEmployee();
+            } else {
+                generateTeam();
+            }
+        })
 }
 
 function managerQuestions(employeeData) {
@@ -164,6 +181,28 @@ function managerQuestions(employeeData) {
                 name: "employeeConfirm"
             },
         ])
+        .then((data) => {
+            const manager = new Manager(
+                employeeData.name,
+                employeeData.id,
+                employeeData.email,
+                employeeData.officeNumber,
+                data.officeNumber
+            );
+
+            team.push(manager);
+
+            if(data.employeeConfirm === true) {
+                generateEmployee();
+            } else {
+                generateTeam();
+            }
+        })
+}
+
+function generateTeam() {
+    fs.existsSync(OUTPUT_DIR) || fs.mkdirSync(OUTPUT_DIR)
+    fs.writeFileSync(outputPath, render(team), "utf-8")
 }
 
 // After the user has input all employees desired, call the `render` function (required
