@@ -1,6 +1,6 @@
 # Team Profile Generator
 
-## This is a node.js app that takes user input and generates an html page with easy-to-read cards. The app helps the user keep track of a company's employees, their roles, and pertinent information specific to their positions.
+* This is a node.js app that takes user input and generates an html page with easy-to-read cards. The app helps the user keep track of a company's employees, their roles, and pertinent information specific to their positions.
 
 ## Demo Video
 [Click here to be redirected to Youtube](https://www.youtube.com/watch?v=Bgmp0MKzuow)
