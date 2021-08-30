@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const team = [];
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -62,10 +63,109 @@ function generateEmployee() {
                 message: "What is the employee's office number?",
                 name: "officeNumber",
             },
-            
-            
+        ])
+        .then((data) => {
+            console.log(data);
+            if (data.role === "Engineer") {
+                engineerQuestions(data);
+            } else if (data.role === "Intern") {
+                internQuestions(data);
+            } else {
+                managerQuestions(data);
+            }
+
+        });
+}
+
+function engineerQuestions(employeeData) {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "gitHub",
+                message: "What is the employee's Github username?",
+                validate: (githubInput) => {
+                    if (!githubInput) {
+                        console.log("Please enter a vlid Github username");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            {
+                type: "confirm",
+                message: "Would you like to add another employee?",
+                name: "employeeConfirm"
+            },
+        ])
+        .then((data) => {
+            const engineer = new Engineer(
+                employeeData.name,
+                employeeData.id,
+                employeeData.email,
+                employeeData.officeNumber,
+                data.github
+            );
+
+            team.push(engineer);
+
+            if(data.employeeConfirm === true) {
+                generateEmployee();
+            } else {
+                generateTeam();
+            }
+        })
+}
+
+function internQuestions(employeeData) {
+    inquirer
+        .prompt([
+            {
+            type: "input",
+            name: "school",
+            message: "Where does the employee attend school?",
+            validate: (schoolInput) => {
+                if(!schoolInput) {
+                    console.log("Please enter a school name.");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            },
+            {
+                type: "confirm",
+                message: "Would you like to add another employee?",
+                name: "employeeConfirm"
+            },
         ])
 }
+
+function managerQuestions(employeeData) {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "What is the manager's office phone number?",
+                validate: (officeInput) => {
+                    if (!officeInput) {
+                    console.log("Please enter an office phone number");
+                    return false;
+                } else {
+                    return true;
+                    }
+                }
+            },
+            {
+                type: "confirm",
+                message: "Would you like to add another employee?",
+                name: "employeeConfirm"
+            },
+        ])
+}
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
