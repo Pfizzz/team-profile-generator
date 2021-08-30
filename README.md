@@ -5,6 +5,11 @@
 ## Demo Video
 [Click here to be redirected to Youtube](https://www.youtube.com/watch?v=Bgmp0MKzuow)
 
+## Sample HTML
+
+The sample HTML file may be found in the sample folder on this repo.
+[Click here to view the sample](https://github.com/Pfizzz/team-profile-generator/blob/d1b6b72f2452c22cf0540c5a60edc72c7a990d98/sample/sample.html)
+
 ## Installation
 Initialize a new local repo, clone the repository for this project, and install node.js. The app may be run from the command line using "node app" when the user is in the local repo directory.
 
