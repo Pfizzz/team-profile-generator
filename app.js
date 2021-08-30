@@ -21,19 +21,20 @@ function generateEmployee() {
                 type: "input",
                 message: "What is the employee's name?",
                 name: "name",
-                // validate: (nameInput) => {
-                //     if (nameInput) {
-                //         return true;
-                //     } else {
-                //         console.log("What's your name?");
-                //         return false;
-                //     }
-                // }
+                validate: (nameInput) => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log("What's your name?");
+                        return false;
+                    }
+                }
             },
             {
                 type: "list",
                 message: "What is the employee's role?",
                 choices: ["Engineer", "Manager", "Intern"],
+                name: "role",
             },
             {
                 type: "input",
@@ -43,6 +44,7 @@ function generateEmployee() {
             {
                 type: "input",
                 message: "What is the employee's ID number?",
+                name: "id",
                 validate: (idInput) => {
                     if (isNaN(idInput)) {
                         console.log("Please enter a valid number");
